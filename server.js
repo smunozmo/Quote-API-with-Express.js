@@ -41,6 +41,20 @@ app.get('/api/quotes', (req, res, next) => {
     }
 })
 
+app.post('/api/quotes', (req, res, next) => {
+    let quoteObject = {
+        quote: '',
+    };
+    
+    if (req.query['quote'] && req.query['person']) {
+        quotes.push(req.query);
+        quoteObject['quote'] = req.query;
+        res.send(quoteObject);
+    } else {
+        res.status(400).send();
+    }
+})
+
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 })
